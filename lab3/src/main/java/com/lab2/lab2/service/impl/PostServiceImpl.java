@@ -2,6 +2,7 @@ package com.lab2.lab2.service.impl;
 
 import com.lab2.lab2.entity.Comment;
 import com.lab2.lab2.entity.Post;
+import com.lab2.lab2.entity.User;
 import com.lab2.lab2.entity.dto.request.CommentDto;
 import com.lab2.lab2.entity.dto.request.PostDto;
 import com.lab2.lab2.repo.PostRepo;
@@ -11,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,8 +58,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deletePostById(Long id) {
-        Optional<Post> userToDelete = postRepo.findById(id);
-        if (userToDelete.isPresent()) {
+        Optional<Post> postToDelete = postRepo.findById(id);
+        if (postToDelete.isPresent()) {
             postRepo.deleteById(id);
         }
     }
@@ -68,6 +70,16 @@ public class PostServiceImpl implements PostService {
         Comment comment = modelMapper.map(commentDto,Comment.class);
         post.addComment(comment);
     }
+
+    @Override
+    public List<Comment> getPostComment(Long id) {
+        Post post = getPostById(id);
+        if (post != null) {
+            return post.getComments();
+        }
+        return new ArrayList<>();
+    }
+
 }
 
 

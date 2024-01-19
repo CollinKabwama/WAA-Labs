@@ -1,5 +1,6 @@
 package com.lab2.lab2.controller;
 
+import com.lab2.lab2.entity.Comment;
 import com.lab2.lab2.entity.Post;
 import com.lab2.lab2.entity.dto.request.CommentDto;
 import com.lab2.lab2.entity.dto.request.PostDto;
@@ -57,6 +58,13 @@ public class PostController {
     public void createComment(@RequestBody CommentDto commentDto, @PathVariable Long id){
         postService.createComment(commentDto,id);
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}/comments")
+    public List<Comment> getCommentByPostId(@PathVariable Long id){
+        return postService.getPostComment(id);
+    }
+
 
 
 

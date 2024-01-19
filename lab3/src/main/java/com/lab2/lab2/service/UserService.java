@@ -15,4 +15,6 @@ public interface UserService {
     void createUser(UserDto userDto);
 
     List<Post> getUserPosts(Long id);
+
+    void deleteUserById(Long id);
 }

@@ -36,7 +36,6 @@ public class UserController {
         userService.createUser(userDto);
     }
 
-
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}/posts")
     public List<Post> getPostsByUserId(@PathVariable Long id){
@@ -44,6 +43,11 @@ public class UserController {
     }
 
 
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @DeleteMapping("{id}")
+    public void deleteUserById(@PathVariable Long id){
+        userService.deleteUserById(id);
+    }
 
 
 }

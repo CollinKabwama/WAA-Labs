@@ -1,5 +1,6 @@
 package com.lab2.lab2;
 
+import com.lab2.lab2.entity.Comment;
 import com.lab2.lab2.entity.Post;
 import com.lab2.lab2.entity.User;
 import com.lab2.lab2.repo.PostRepo;
@@ -29,6 +30,13 @@ public class Lab2Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		Comment comment1 = new Comment("Nice 1");
+		Comment comment2 = new Comment("Nice 2");
+		Comment comment3 = new Comment("Nice 3");
+		Comment comment4 = new Comment("Nice 4");
+		Comment comment5 = new Comment("Nice 5");
+
+
 		Post post1 = new Post("Book 1", "Content of Book 1", "Author 1");
 		Post post2 = new Post("Book 2", "Content of Book 2", "Author 2");
 		Post post3 = new Post("Book 3", "Content of Book 3", "Author 3");
@@ -39,6 +47,14 @@ public class Lab2Application implements CommandLineRunner {
 		User user1 = new User("User 1");
 		User user2 = new User("User 2");
 		User user3 = new User("User 3");
+
+
+		post1.addComment(comment1);
+		post1.addComment(comment2);
+		post2.addComment(comment3);
+		post2.addComment(comment4);
+		post1.addComment(comment5);
+
 		user2.addPost(post1);
 		user2.addPost(post3);
 		user1.addPost(post2);

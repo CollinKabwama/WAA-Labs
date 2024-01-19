@@ -18,4 +18,7 @@ public class Comment {
     long id;
     String name;
 
+    public Comment(String name) {
+        this.name = name;
+    }
 }

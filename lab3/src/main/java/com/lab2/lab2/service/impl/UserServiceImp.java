@@ -47,6 +47,14 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public void deleteUserById(Long id) {
+        Optional<User> userToDelete = userRepo.findById(id);
+        if (userToDelete.isPresent()) {
+            userRepo.deleteById(id);
+        }
+    }
+
+    @Override
     public void createUser(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         userRepo.save(user);
