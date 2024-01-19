@@ -1,13 +1,13 @@
 package com.lab2.lab2.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,10 +20,19 @@ public class Post {
     String title;
     String content;
     String author;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "post_id")
+    List<Comment> comments;
 
     public Post(String title, String content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;
+        this.comments = new ArrayList<>();
+
+    }
+
+    public void addComment(Comment comment){
+        comments.add(comment);
     }
 }

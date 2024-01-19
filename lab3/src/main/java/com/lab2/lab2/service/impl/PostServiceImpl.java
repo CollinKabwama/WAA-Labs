@@ -1,6 +1,8 @@
 package com.lab2.lab2.service.impl;
 
+import com.lab2.lab2.entity.Comment;
 import com.lab2.lab2.entity.Post;
+import com.lab2.lab2.entity.dto.request.CommentDto;
 import com.lab2.lab2.entity.dto.request.PostDto;
 import com.lab2.lab2.repo.PostRepo;
 import com.lab2.lab2.service.PostService;
@@ -58,6 +60,13 @@ public class PostServiceImpl implements PostService {
         if (userToDelete.isPresent()) {
             postRepo.deleteById(id);
         }
+    }
+
+    @Override
+    public void createComment(CommentDto commentDto, Long id) {
+        Post post = getPostById(id);
+        Comment comment = modelMapper.map(commentDto,Comment.class);
+        post.addComment(comment);
     }
 }
 

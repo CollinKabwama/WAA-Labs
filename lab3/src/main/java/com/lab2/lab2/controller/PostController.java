@@ -1,6 +1,7 @@
 package com.lab2.lab2.controller;
 
 import com.lab2.lab2.entity.Post;
+import com.lab2.lab2.entity.dto.request.CommentDto;
 import com.lab2.lab2.entity.dto.request.PostDto;
 import com.lab2.lab2.repo.PostRepo;
 import com.lab2.lab2.service.PostService;
@@ -49,6 +50,12 @@ public class PostController {
     @DeleteMapping("{id}")
     public void deletePostById(@PathVariable Long id){
         postService.deletePostById(id);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/{id}/comments")
+    public void createComment(@RequestBody CommentDto commentDto, @PathVariable Long id){
+        postService.createComment(commentDto,id);
     }
 
 

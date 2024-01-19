@@ -2,6 +2,7 @@ package com.lab2.lab2.service.impl;
 
 import com.lab2.lab2.entity.Post;
 import com.lab2.lab2.entity.User;
+import com.lab2.lab2.entity.dto.request.CommentDto;
 import com.lab2.lab2.entity.dto.request.PostDto;
 import com.lab2.lab2.entity.dto.request.UserDto;
 import com.lab2.lab2.repo.PostRepo;
@@ -44,7 +45,6 @@ public class UserServiceImp implements UserService {
         }
         return null;
     }
-
 
     @Override
     public void createUser(UserDto userDto) {
