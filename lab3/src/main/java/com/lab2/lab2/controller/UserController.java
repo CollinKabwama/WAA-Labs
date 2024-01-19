@@ -1,5 +1,6 @@
 package com.lab2.lab2.controller;
 
+import com.lab2.lab2.entity.Comment;
 import com.lab2.lab2.entity.Post;
 import com.lab2.lab2.entity.User;
 import com.lab2.lab2.entity.dto.request.PostDto;
@@ -49,5 +50,18 @@ public class UserController {
         userService.deleteUserById(id);
     }
 
+    @GetMapping("/{userId}/posts/{postId}/comments/{commentId}")
+    public Comment getCommentByUserPostComment(
+            @PathVariable Long userId,
+            @PathVariable Long postId,
+            @PathVariable Long commentId){
+        return userService.getCommentByUserPostComment(userId, postId, commentId);
+    }
 
+    @GetMapping("/{userId}/posts/{postId}")
+    public Post getPostByUser(
+            @PathVariable Long userId,
+            @PathVariable Long postId){
+        return userService.getPostByUser(userId, postId);
+    }
 }

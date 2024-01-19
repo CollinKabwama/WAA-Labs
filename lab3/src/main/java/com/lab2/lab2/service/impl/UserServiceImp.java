@@ -1,12 +1,16 @@
 package com.lab2.lab2.service.impl;
 
+import com.lab2.lab2.entity.Comment;
 import com.lab2.lab2.entity.Post;
 import com.lab2.lab2.entity.User;
 import com.lab2.lab2.entity.dto.request.CommentDto;
 import com.lab2.lab2.entity.dto.request.PostDto;
 import com.lab2.lab2.entity.dto.request.UserDto;
+import com.lab2.lab2.repo.CommentRepo;
 import com.lab2.lab2.repo.PostRepo;
 import com.lab2.lab2.repo.UserRepo;
+import com.lab2.lab2.service.CommentService;
+import com.lab2.lab2.service.PostService;
 import com.lab2.lab2.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,12 @@ import java.util.Optional;
 public class UserServiceImp implements UserService {
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private PostService postService;
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -55,8 +65,36 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public Comment getCommentByUserPostComment(Long userId, Long postId, Long commentId) {
+        User user = getUserById(userId);
+        if (user!=null){
+            Post post = postService.getPostById(postId);
+            if (post!=null && user.getPosts().contains(post)){
+                Comment comment = commentService.getCommentById(postId);
+                if (comment!=null && post.getComments().contains(comment)){
+                    return comment;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Post getPostByUser(Long userId, Long postId) {
+        User user = getUserById(userId);
+        if (user!=null){
+            Post post = postService.getPostById(postId);
+            if (post!=null && user.getPosts().contains(post)){
+                return post;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void createUser(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         userRepo.save(user);
     }
+
 }

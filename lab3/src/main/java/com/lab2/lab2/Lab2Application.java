@@ -41,7 +41,7 @@ public class Lab2Application implements CommandLineRunner {
 		Post post2 = new Post("Book 2", "Content of Book 2", "Author 2");
 		Post post3 = new Post("Book 3", "Content of Book 3", "Author 3");
 		Post post4 = new Post("Book 4", "Content of Book 4", "Author 4");
-		Post post5 = new Post( "Book 5", "Content of Book 5", "Author 5");
+		Post post5 = new Post( "Book 4", "Content of Book 5", "Author 5");
 
 
 		User user1 = new User("User 1");
@@ -64,6 +64,14 @@ public class Lab2Application implements CommandLineRunner {
 		userRepo.save(user1);
 		userRepo.save(user2);
 		userRepo.save(user3);
+
+		System.out.println(userRepo.usersWithMoreThanPosts(3));
+		System.out.println(userRepo.usersWithMoreThanPosts(2));
+
+		System.out.println(postRepo.findPostsByTitle("Book 4"));
+		System.out.println(postRepo.findPostsByTitle("Book 3"));
+
+		System.out.println(userRepo.usersThatMadePostWith("Book 4"));
 
 
 	}

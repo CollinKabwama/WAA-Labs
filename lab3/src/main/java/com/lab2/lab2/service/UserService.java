@@ -1,5 +1,6 @@
 package com.lab2.lab2.service;
 
+import com.lab2.lab2.entity.Comment;
 import com.lab2.lab2.entity.Post;
 import com.lab2.lab2.entity.User;
 import com.lab2.lab2.entity.dto.request.UserDto;
@@ -17,4 +18,8 @@ public interface UserService {
     List<Post> getUserPosts(Long id);
 
     void deleteUserById(Long id);
+
+    Comment getCommentByUserPostComment(Long userId, Long postId, Long commentId);
+
+    Post getPostByUser(Long userId, Long postId);
 }

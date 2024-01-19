@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostRepo extends JpaRepository<Post,Long> {
-
+    List<Post> findPostsByTitle(String title);
 }
