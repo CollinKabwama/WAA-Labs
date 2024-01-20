@@ -1,5 +1,6 @@
 package com.lab2.lab2.service.impl;
 
+import com.lab2.lab2.aspect.ExecutionTime;
 import com.lab2.lab2.entity.Comment;
 import com.lab2.lab2.entity.Post;
 import com.lab2.lab2.entity.User;
@@ -12,6 +13,11 @@ import com.lab2.lab2.repo.UserRepo;
 import com.lab2.lab2.service.CommentService;
 import com.lab2.lab2.service.PostService;
 import com.lab2.lab2.service.UserService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,15 +40,19 @@ public class UserServiceImp implements UserService {
     @Autowired
     private ModelMapper modelMapper;
 
+    private EntityManager entityManager;
+
     @Override
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }
 
     @Override
+    @ExecutionTime
     public User getUserById(Long id) {
         Optional<User> user = userRepo.findById(id);
         if (user.isPresent()) {
+            //throw new RuntimeException();
             return user.get();
         }
         return null;
@@ -96,5 +106,5 @@ public class UserServiceImp implements UserService {
         User user = modelMapper.map(userDto, User.class);
         userRepo.save(user);
     }
-
+    
 }
