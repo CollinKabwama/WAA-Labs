@@ -49,4 +49,7 @@ public class TraceAdvice {
         Exceptionn exceptionLog = new Exceptionn(LocalDateTime.now(), defaultUser, joinPoint.getSignature().getName(), ex.getClass().getSimpleName());
         exceptionnService.addException(exceptionLog);
     }
+
+
+
 }
